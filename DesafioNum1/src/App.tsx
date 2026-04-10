@@ -7,9 +7,12 @@ import imagem from "./img/image.png";
 //use state vai guardar a informacao q muda na tela OU SEJA vai vai guardar a informacao
 //de qual alternativa que eu cliquei dando um numero de indice pra ela onde minha funcao vai 
 // verificar se ta certo e aparecer a msg na tela
-
-export function Exercicio(
-  { title,
+const alternativas = ['Tomar uma decisão imediata, desativando temporariamente o sistema e assumindo os riscos.',
+  'Convocar uma forca-tarefa para investigar a fundo e tomar uma decisão coletiva em 2 horas.',
+  'Esperar instruções da diretoria e evitar agir até ter um respaldo formal.'];
+  
+  export function Exercicio(
+    { title,
     text,
     subtitle,
     italictext, }:
@@ -20,7 +23,7 @@ export function Exercicio(
       italictext: string;
       alternativas: string[];
       alternativaCorreta: number;
-
+      
       feedback: {
         correct: {
           title: string;
@@ -32,11 +35,11 @@ export function Exercicio(
         };
       };
     }
+    
 
-
-) {
-//const [selecionada, setSelecionada] = useState<number | null>(null); 
-  //ou ela pode ser um numero ou nao pode ser nd (null) pq qnd eu clico ela vira um numero
+  ) {
+    //const [selecionada, setSelecionada] = useState<number | null>(null); 
+    //ou ela pode ser um numero ou nao pode ser nd (null) pq qnd eu clico ela vira um numero
   //selecionada → valor atual setSelecionada → função que muda o valor
 
   return (
@@ -52,13 +55,24 @@ export function Exercicio(
         <div className="EsquerdaImg">
           <img src={imagem} alt="Homem mexendo no computador" />
         </div>
-        <div></div>
+        <div className="OpcoesDireita">
+          <div className="alternativas">
+            {alternativas.map((alternativa, index) => (
+              <button className="opcao" key={index}> <div className="circulo">{letras[index]}</div> 
+                {alternativa}
+              </button>
+            ))}
+          </div>
+          <div className="BoxBotao">
+            <button className="btn"><strong>Enviar</strong></button>
+          </div>
+        </div>
       </div>
-         <button>Enviar</button>
+
     </div>
   )
-} 
+}
 
 
-
+const letras = ['A', 'B', 'C']
 export default Exercicio;

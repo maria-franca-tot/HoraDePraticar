@@ -2,21 +2,19 @@ body {
     background-color: black;
     display: flex;
     color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .cardQuestao {
-    width: 80%;
-    height: 500px;
-
+    width: 100%;
+    height: auto;
     margin: 40px auto;
     background-color: #ffe5c9;
     padding: 20px;
     border-radius: 20px;
 }
 
-.cardQuestao h2,
-h4,
-p {
+.cardQuestao h2, h4, p {
     color: black;
     margin: 20px 40px;
 
@@ -24,16 +22,71 @@ p {
 
 .conteudo {
     width: 100%;
-    display: grid;
-}
-
-.EsquerdaImg {
-    width: 60%;
-    height: 280px;
-    margin-left: 20px;
     display: flex;
 }
 
-.container button{
-    background-color: #f7b698;
+img {
+    width: 300px ;
+    margin-left: 60px;
+}
+
+
+.alternativas {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-left: 110px;
+    text-align: left;
+    font-size: 12px;
+}
+
+.opcao {
+    width: 90%;
+    height: 60px;
+    text-align: left;
+    padding: 2.5%;
+    border-radius: 4px;
+    background-color: #f7b799;
+    color: black;
+    display: block;
+    white-space: normal; 
+    word-break: break-word;
+}
+
+.opcao:focus {
+    border: 1.75px solid black;
+}
+
+.BoxBotao{
+    margin-top: 30px;
+}
+
+button {
+    background-color: #e34926;
+    width: 80px;
+    height: 30px;
+    border-radius: 2px;
+    border: none;
+    font-size: 15px;
+    
+}
+
+.btn:hover {
+    background-color: #f7b799;
+    color: black;
+}
+
+
+
+.circulo{
+    width: 40px;
+    height: 40px;
+    align-content: center;
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 100%;
+    background-color: #e34926;
 }
