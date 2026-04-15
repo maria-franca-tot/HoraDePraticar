@@ -1,121 +1,114 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import "./App.css";
+import imagem from "./img/image.png";
+import { useState } from "react";
+//use state vai guardar a informacao q muda na tela OU SEJA vai vai guardar a informacao de qual alternativa que eu cliquei dando um numero de indice pra ela onde minha funcao vai  verificar se ta certo e aparecer a msg na tela
 
-function App() {
-  const [count, setCount] = useState(0)
+const alternativas = ['Tomar uma decisão imediata, desativando temporariamente o sistema e assumindo os riscos.',
+  'Convocar uma força-tarefa para investigar a fundo e tomar uma decisão coletiva em 2 horas.',
+  'Esperar instruções da diretoria e evitar agir até ter um respaldo formal.'];
+
+const letras = ['A', 'B', 'C']
+
+export function Exercicio(
+  { title,
+    text,
+    subtitle,
+    italictext,
+    feedback,
+    correctAlternative }:
+    {
+      text: string;
+      title: string;
+      subtitle: string;
+      italictext: string;
+      alternativas: string[];
+      correctAlternative: number;
+
+      feedback: {
+        correct: { title: string; text: string };
+        incorrect: { title: string; text: string };
+      };
+    }
+) {
+  const [mostrarFeedBack, setMostrarFeedBack] = useState(false)
+  const [selecionada, setSelecionada] = useState<number | null>(null);
+  //ou ela pode ser um numero ou nao pode ser nd (null) pq qnd eu clico ela vira um numero
+  //selecionada → valor atual setSelecionada → função que muda o valor
+  const [resultado, setResultado] = useState<"correct" | "incorrect" | null>(null);
+
+
+  function verificarResp() {
+    if (selecionada === null) return; //se n tiver nd clicado ele vai evitar erro
+    if (selecionada === correctAlternative) {
+      setResultado("correct")
+    } else {
+      setResultado("incorrect")
+    }
+
+    setMostrarFeedBack(true) //aq vai abrir o pop up do feedback certo ou errado
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="cardQuestao">
+      <div className="blocosDeTexto">
+        <h2>{title}</h2>
+        <p>{text}</p>
+        <h4>{subtitle}</h4>
+        <p><em>{italictext}</em></p>
+      </div>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <div className="conteudo">
+        <div className="EsquerdaImg">
+          <img src={imagem} alt="Homem mexendo no computador" />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <div className="OpcoesDireita">
+          <div className="alternativas">
+            {alternativas.map((alternativa, index) => (
+              <button className="opcao" key={index} onClick={() => setSelecionada(index)}> {/*quando clicar, guarda o número dessa alternativa*/}
+                <div className="circulo">{letras[index]}</div>
+                <span>{alternativa}</span>
+              </button>
+            ))}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+          </div>
+
+          <div className="BoxBotao">
+            <button className="btn" onClick={verificarResp}><strong>Enviar</strong></button>
+
+            {mostrarFeedBack && (
+              <div className="overlay">
+                <div className="feedback">
+                  {resultado === "correct" ? (
+                    <>
+                      <h3>{feedback.correct.title}</h3>
+                      <p>{feedback.correct.text}</p>
+                      <button className="btn" onClick={() => {  /*quando clica no botao limpa a selecao e a msg  */
+                        setSelecionada(null);
+                        setResultado(null);
+                        setMostrarFeedBack(false);
+                      }}>CONTINUAR</button>
+                    </>
+                  ) : (
+                    <>
+                      <h3>{feedback.incorrect.title}</h3>
+                      <p>{feedback.incorrect.text}</p>
+                      <button className="btn" onClick={() => {
+                        setSelecionada(null);
+                        setResultado(null);
+                        setMostrarFeedBack(false);
+                      }}>TENTE NOVAMENTE</button>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   )
 }
 
-export default App
+export default Exercicio;
