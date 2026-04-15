@@ -8,6 +8,7 @@ body{
     height: 600px;
     background-color: #ffe5c9;
     border-radius: 0px 5px 5px 0px;
+    padding-top: 2.5%;
 }
 
 .abrirMenu{
@@ -27,6 +28,5 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
-   
     
 }
