@@ -1,4 +1,32 @@
 body{
     background-color: black;
+    margin: 0;
 }
 
+.menu{
+    width: 5%;
+    height: 600px;
+    background-color: #ffe5c9;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.abrirMenu{
+    background: #ffe5c9;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    margin-left: 40px;
+    border: none;
+    color: #e34926;
+    font-size: 18px;
+}
+
+.menu img{
+    width: 80%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
+    
+}

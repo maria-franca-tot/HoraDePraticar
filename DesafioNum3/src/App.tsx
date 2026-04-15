@@ -1,7 +1,13 @@
-import './App.css'; 
+import './App.css';
+import logoTOT from './img/logoTOT.png'
 
-function navBAR(){
-
+function NavBAR() {
+  return (
+    <div className="menu">
+      <img src={logoTOT}/>
+      <button className="abrirMenu">&gt;</button>
+    </div>
+  );
 }
 
-export default navBAR;
+export default NavBAR;
